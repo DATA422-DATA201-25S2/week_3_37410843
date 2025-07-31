@@ -16,4 +16,6 @@ This report, commissioned by the illustrious and eminent Big Dawg, will investig
 knitr::kable(dt_summary, caption = "Table 1: Mean engine displacement by number of cylinders.") %>%
   kableExtra::kable_classic(full_width = F, position = "center", html_font = "Computer Modern Roman")
 ```
-
+```{r mtcars_chart}
+dt_summary %>% ggplot(aes(x=Cylinders, y=Displacement)) + geom_col() + theme_classic() + labs(x="Number of Cylinders", y="Engine Displacement (cm^3)", title = "Figure 1. Mean engine displacement by number of cylinders.")
+```
