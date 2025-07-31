@@ -5,17 +5,29 @@ date: "2025-07-31"
 output: html_document
 ---
 
-This report, commissioned by the illustrious and eminent Big Dawg, will investigate whether cars with more cylinders have more engines, or whether this is a lie fabricated by undercover communists and blue-haired liberal butterflies. The default R dataset 'mtcars' will be used and both tabular and graphical methods used to compare engine displacement for each cylinder count (4, 6, or 8).
+This report, commissioned by the illustrious and eminent Big Dawg, will investigate whether cars with more cylinders have bigger engines, or whether this is a lie fabricated by undercover communists and blue-haired liberal butterflies. The default R dataset 'mtcars' will be used and both tabular and graphical methods used to compare engine displacement for each cylinder count (4, 6, or 8).
 
 ```{r mtcars_table}
  dt <- mtcars |> select(cyl, disp)
- dt_summary <- dt %>% group_by(cyl) %>% 
-   summarize(disp_m = round(mean(disp), 2)) %>% 
-   rename("Cylinders" = cyl, "Displacement" = disp_m)
+ dt_summary <- dt |> group_by(cyl) |>
+   summarize(disp_mean = round(mean(disp), 2)) |>
+   rename("Cylinders" = cyl, "Displacement" = disp_mean)
   
-knitr::kable(dt_summary, caption = "Table 1: Mean engine displacement by number of cylinders.") %>%
-  kableExtra::kable_classic(full_width = F, position = "center", html_font = "Computer Modern Roman")
+knitr::kable(
+  dt_summary, 
+  caption = "Table 1: Mean engine displacement by number of cylinders."
+) |>
+  kableExtra::kable_classic(
+    full_width = F, 
+    position = "center", 
+    html_font = "Computer Modern Roman"
+  )
 ```
 ```{r mtcars_chart}
-dt_summary %>% ggplot(aes(x=Cylinders, y=Displacement)) + geom_col() + theme_classic() + labs(x="Number of Cylinders", y="Engine Displacement (cm^3)", title = "Figure 1. Mean engine displacement by number of cylinders.")
+dt_summary |> 
+  ggplot(aes(x = Cylinders, y = Displacement)) + 
+  geom_col() + 
+  theme_classic() + 
+  labs(x = "Number of Cylinders", y = "Engine Displacement (cm^3)", title = "Figure 1. Mean engine displacement by number of cylinders.")
 ```
+The plot shows that in the mtcars dataset, as number of cylinders increases, engine displacement (i.e. engine size) increases. Assuming the dataset is representative of the population, the report concludes that this is true for cars in general. The radical left wins (this time around...)
