@@ -1,0 +1,19 @@
+---
+title: "Comparison of Cylinder Count to Engine Displacement"
+author: "Varya Kern"
+date: "2025-07-31"
+output: html_document
+---
+
+This report, commissioned by the illustrious and eminent Big Dawg, will investigate whether cars with more cylinders have more engines, or whether this is a lie fabricated by undercover communists and blue-haired liberal butterflies. The default R dataset 'mtcars' will be used and both tabular and graphical methods used to compare engine displacement for each cylinder count (4, 6, or 8).
+
+```{r mtcars_table}
+ dt <- mtcars |> select(cyl, disp)
+ dt_summary <- dt %>% group_by(cyl) %>% 
+   summarize(disp_m = round(mean(disp), 2)) %>% 
+   rename("Cylinders" = cyl, "Displacement" = disp_m)
+  
+knitr::kable(dt_summary, caption = "Table 1: Mean engine displacement by number of cylinders.") %>%
+  kableExtra::kable_classic(full_width = F, position = "center", html_font = "Computer Modern Roman")
+```
+
